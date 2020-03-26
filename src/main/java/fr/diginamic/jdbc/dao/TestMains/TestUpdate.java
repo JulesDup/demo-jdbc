@@ -4,12 +4,14 @@ import java.sql.SQLException;
 
 import fr.diginamic.entities.Fournisseur;
 import fr.diginamic.jdbc.ConnexionJDBC;
+import fr.diginamic.jdbc.dao.FournisseurDao;
 import fr.diginamic.jdbc.dao.FournisseurDaoJdbc;
 
 public class TestUpdate {
 	public static void main(String[] args) {
 
-		FournisseurDaoJdbc fourDao = new FournisseurDaoJdbc();
+		// toujours intancier de la sorte : interface var = new implementation()
+		FournisseurDao fourDao = new FournisseurDaoJdbc();
 		Fournisseur fournisseur = new Fournisseur("L’Espace Création", 4);
 		int rep = 0;
 		try {

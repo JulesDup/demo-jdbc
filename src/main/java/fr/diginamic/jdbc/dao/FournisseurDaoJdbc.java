@@ -2,6 +2,7 @@ package fr.diginamic.jdbc.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,6 +14,25 @@ import fr.diginamic.entities.Fournisseur;
 import fr.diginamic.jdbc.ConnexionJDBC;
 
 public class FournisseurDaoJdbc implements FournisseurDao {
+
+	public Statement getStatement() throws SQLException, ClassNotFoundException {
+		ResourceBundle db = ResourceBundle.getBundle("db");
+		Class.forName(db.getString("db.driver"));
+		Connection connection = DriverManager.getConnection(db.getString("db.url"), db.getString("db.user"),
+				db.getString("db.pass"));
+		Statement stm = connection.createStatement();
+		return stm;
+	}
+
+	public Connection getConnection() throws SQLException, ClassNotFoundException {
+
+		ResourceBundle db = ResourceBundle.getBundle("db");
+		Class.forName(db.getString("db.driver"));
+		Connection connection = DriverManager.getConnection(db.getString("db.url"), db.getString("db.user"),
+				db.getString("db.pass"));
+		return connection;
+
+	}
 
 	public List<Fournisseur> extraire(String table) throws SQLException, ClassNotFoundException {
 		int rslt = 0;
